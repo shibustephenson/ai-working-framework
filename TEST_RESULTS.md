@@ -17,12 +17,12 @@ sources apart, so you can see who ran what:
 
 | Program | Source | Manual (owner, Codespaces) | Claude (container) | GitHub Actions |
 |---|---|---|---|---|
-| Python | [`hello.py`](hello.py) | Passed (reported) | Passed | [Hello world tests](https://github.com/shibustephenson/ai-working-framework/actions/workflows/hello-world.yml) |
-| C | [`hello.c`](hello.c) | Passed (reported) | Passed | [Hello world tests](https://github.com/shibustephenson/ai-working-framework/actions/workflows/hello-world.yml) |
-| C++ | [`hello.cpp`](hello.cpp) | Passed (reported) | Passed | [Hello world tests](https://github.com/shibustephenson/ai-working-framework/actions/workflows/hello-world.yml) |
-| Java | [`HelloWorld.java`](HelloWorld.java) | Passed (reported) | Passed | [Hello world tests](https://github.com/shibustephenson/ai-working-framework/actions/workflows/hello-world.yml) |
-| COBOL | [`hello.cob`](hello.cob) | Passed (reported) | Passed | [Hello world tests](https://github.com/shibustephenson/ai-working-framework/actions/workflows/hello-world.yml) |
-| 8051 assembly | [`hello_8051.asm`](hello_8051.asm) | Not yet tested | **Simulator only**, see below | [8051 Hello world (simulator)](https://github.com/shibustephenson/ai-working-framework/actions/workflows/hello-8051.yml) |
+| Python | [`hello.py`](hello.py) | Passed (reported) | Passed | [Passed](https://github.com/shibustephenson/ai-working-framework/actions/runs/39032674409/job/117396154112) |
+| C | [`hello.c`](hello.c) | Passed (reported) | Passed | [Passed](https://github.com/shibustephenson/ai-working-framework/actions/runs/39032674409/job/117396154082) |
+| C++ | [`hello.cpp`](hello.cpp) | Passed (reported) | Passed | [Passed](https://github.com/shibustephenson/ai-working-framework/actions/runs/39032674409/job/117396154109) |
+| Java | [`HelloWorld.java`](HelloWorld.java) | Passed (reported) | Passed | [Passed](https://github.com/shibustephenson/ai-working-framework/actions/runs/39032674409/job/117396154135) |
+| COBOL | [`hello.cob`](hello.cob) | Passed (reported) | Passed | [Passed](https://github.com/shibustephenson/ai-working-framework/actions/runs/39032674409/job/117396154010) |
+| 8051 assembly | [`hello_8051.asm`](hello_8051.asm) | Not yet tested | **Simulator only**, see below | [Simulator only](https://github.com/shibustephenson/ai-working-framework/actions/runs/39032674414/job/117396153901) |
 
 **Expected output.** Python, C, C++, Java and COBOL must print exactly
 `Hello world` followed by a newline (`\n`). The 8051 program must send
@@ -136,6 +136,26 @@ these runs, and each exited with status 1 as expected:
 - `hello_8051.asm` temporarily changed to send `Hello wrld`.
 
 The original files were restored afterwards.
+
+## GitHub Actions results
+
+The first runs of both workflows used commit
+[`42b8d92`](https://github.com/shibustephenson/ai-working-framework/commit/42b8d92759ed997ef338e0762c104388c9124bbd)
+on `ubuntu-24.04` runners. Every later push runs them again. The latest
+results are on the
+[Actions page](https://github.com/shibustephenson/ai-working-framework/actions).
+
+| Workflow | Run | Job | Result | Last log line of the test step |
+|---|---|---|---|---|
+| Hello world tests | [#1](https://github.com/shibustephenson/ai-working-framework/actions/runs/39032674409) | [python](https://github.com/shibustephenson/ai-working-framework/actions/runs/39032674409/job/117396154112) | success | `PASS: python` |
+| Hello world tests | [#1](https://github.com/shibustephenson/ai-working-framework/actions/runs/39032674409) | [c](https://github.com/shibustephenson/ai-working-framework/actions/runs/39032674409/job/117396154082) | success | `PASS: c` |
+| Hello world tests | [#1](https://github.com/shibustephenson/ai-working-framework/actions/runs/39032674409) | [cpp](https://github.com/shibustephenson/ai-working-framework/actions/runs/39032674409/job/117396154109) | success | `PASS: cpp` |
+| Hello world tests | [#1](https://github.com/shibustephenson/ai-working-framework/actions/runs/39032674409) | [java](https://github.com/shibustephenson/ai-working-framework/actions/runs/39032674409/job/117396154135) | success | `PASS: java` |
+| Hello world tests | [#1](https://github.com/shibustephenson/ai-working-framework/actions/runs/39032674409) | [cobol](https://github.com/shibustephenson/ai-working-framework/actions/runs/39032674409/job/117396154010) | success | `PASS: cobol` |
+| 8051 Hello world (simulator) | [#1](https://github.com/shibustephenson/ai-working-framework/actions/runs/39032674414) | [simulate](https://github.com/shibustephenson/ai-working-framework/actions/runs/39032674414/job/117396153901) | success (simulator only) | `PASS: 8051 program sent "Hello world\r\n" to the UART` |
+
+The Intel HEX file that as31 produced in CI is byte-for-byte the same as
+the one in Claude's container run shown below.
 
 ## 8051 investigation
 
