@@ -1,0 +1,25 @@
+name: 8051 Hello world (simulator)
+
+# Kept separate from the main Hello world tests: this assembles a copy of
+# hello_8051.asm with as31 (after renaming three directives) and runs it in
+# the ucsim simulator. See TEST_RESULTS.md for what this does and does not prove.
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  simulate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install as31 and ucsim
+        run: sudo apt-get update && sudo apt-get install -y as31 sdcc-ucsim
+
+      - name: Assemble, simulate and check UART output
+        run: tests/test_8051.sh
